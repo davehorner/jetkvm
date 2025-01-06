@@ -84,8 +84,7 @@ func newSession() (*Session, error) {
 				fmt.Println("rpc closed")
 			})
 			d.OnMessage(func(msg webrtc.DataChannelMessage) {
-				fmt.Println("rpc msg")
-				rpcServer.HandleMessage(msg.Data)
+				go rpcServer.HandleMessage(msg.Data)
 			})
 			triggerOTAStateUpdate()
 			triggerVideoStateUpdate()
